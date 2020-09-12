@@ -19,12 +19,46 @@ To solve the above problem I use the below data
 - I got the lattitude and longitude of the midpoint of each neighborhood from maps.google.com
 - I am using the Foursquare API to get the details of the venues in each neighborhood
 - I plan to merge this data with the san franciso house rent and price I scraped from www.bayareamarketreports.com website
+- I also used data from sfgov.org to find the crime rates at different neighborhood
 
+## B. Data Cleansing
 
+As a repository I am using github. I used the resources in section A.2 to create a comma seperated file (CSV) of san francisco neigborhood comprrising of 'Lattitude', 'Longitude', 'House Price', 'Rent', 'Crime Rate'.
 
+![](imgs/20200912-151250.png)
 
+Next I used the Four Square API to get the venues near the neighborhoods. Since it generated a lot of information I decided categorize them in 11 categories like Restuarants, Stores, Shops, Bars, etc. Also normalize all the values between 0 and 1.
 
+![](imgs/20200912-151705.png)
 
+I then merge the 'Rent', 'House Price' and 'Crime Rate' columns to this data frame and also normalize them with respect to largest value of each column.
+
+## C. Clustering
+
+Here I use Kmeans clustering to finds clusters based of the different features for the san francisco neighborhood. I use the elbow method to find the best K for number of clusters which is five in my case. 
 	
-	
+![](imgs/20200912-152541.png)
+
+After getting the cluster labels I add them back to the dataframe as a column for each Neighborhood.
+
+## D. Results
+
+The results shows how Kmeans was able to cluster the different neighborhoods effectively. For example the plot below shows how Kmeans has captured the inverse relation between crime rate and house prices.
+
+![](imgs/20200912-152942.png)
+
+
+Here is a pairplot showing relation between different features
+
+![](imgs/20200912-153153.png)
+
+
+Finally I used folium map package in python to project these clusters over the san franciso city map and on the marker tip show relevant information like crime rate, average house price, etc.
+
+![](imgs/20200912-153526.png)
+
+
+## E. Conclusion
+
+In this study I analyzed different neighborhoods in the san francisco metropolitian area. The compared different neighborhoods based on key preferences like proximity to stores, resturants and also things like crime rate, house prices, transportation, etc. I used unsuprevised learning and Kmeans for cluster these neigborhoods in categories based on their similarities. This method could give a lot of insight to realtors, new residents, tourists to find out information about different neigborhoods in san francisco based on their preferences. 
 	
